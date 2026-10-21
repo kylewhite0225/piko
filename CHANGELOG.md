@@ -1,3 +1,10 @@
+## [3.11.0](https://github.com/kylewhite0225/piko/compare/v3.10.0...v3.11.0) (2026-10-21)
+
+### ✨ New Features
+
+* **Instagram:** Add a Hide Meta AI patch ([d280532](https://github.com/kylewhite0225/piko/commit/d280532c7555f1d48ecfa2df0fd2e0e31971f844))
+* **Instagram:** Add a simplified download menu setting ([0c2302e](https://github.com/kylewhite0225/piko/commit/0c2302e8c9e5d37ab38a9910c7233d2acb36ec63))
+
 ## [3.10.0](https://github.com/crimera/piko/compare/v3.9.0...v3.10.0) (2026-10-10)
 
 ### 🐛 Bug Fixes
