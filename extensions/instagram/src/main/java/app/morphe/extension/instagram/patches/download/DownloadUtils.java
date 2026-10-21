@@ -198,13 +198,62 @@ public class DownloadUtils {
     }
 
 
+    // Used by the simplified download menu, which is only shown for carousels.
+    private static void simplifiedDownloadDialogBox(Context context, MediaData mediaInfo, int position) {
+        InstagramDialogBox dialog = new InstagramDialogBox(context);
+
+        CharSequence[] items = {
+                str("piko_download_current_media"),
+                str("piko_download_all")
+        };
+
+        dialog.addDialogMenuItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface d, int which) {
+                try {
+                    // Position -1 downloads every item in the carousel.
+                    downloadMedia(context, mediaInfo, which == 0 ? position : -1, MediaType.ANY);
+                } catch (Exception e) {
+                    PikoUtils.logger(e);
+                    Logger.printException(() -> "Error at simplifiedDownloadDialogBox", e);
+                    Utils.showToastShort(e.getMessage());
+                }
+            }
+        });
+
+        dialog.setTitle(str("piko_download"));
+        dialog.setNegativeButton(str("piko_close"), (d, which) -> d.dismiss());
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+
+        Dialog dlg = dialog.getDialog();
+        dlg.show();
+    }
+
+    /** Label for the download entry in the post, reel and story menus. */
+    public static String downloadButtonText() {
+        if (Pref.enableDirectDownload()) return str("piko_category_download_media");
+        if (Pref.simplifiedDownloadMenu()) return str("piko_download");
+        return str("piko_download_options");
+    }
+
+    /** Matches any label {@link #downloadButtonText()} can return, for menus that dispatch by text. */
+    public static boolean isDownloadButtonText(CharSequence text) {
+        return str("piko_download_options").contentEquals(text)
+                || str("piko_category_download_media").contentEquals(text)
+                || str("piko_download").contentEquals(text);
+    }
+
     public static void downloadPost(Context context,  UserSession userSession, Object mediaObject, int position) {
         try {
             boolean ENABLE_DIRECT_DOWNLOAD = Pref.enableDirectDownload() && SettingsStatus.downloadMedia;
             position = position < 1 ? 0 : position;
             MediaData mediaInfo = new MediaData(mediaObject, userSession);
-            if (ENABLE_DIRECT_DOWNLOAD) {
+            boolean SIMPLIFIED_DOWNLOAD_MENU = Pref.simplifiedDownloadMenu() && SettingsStatus.downloadMedia;
+            if (ENABLE_DIRECT_DOWNLOAD || (SIMPLIFIED_DOWNLOAD_MENU && mediaInfo.getCarouselSize() <= 1)) {
                 downloadMedia(context, mediaInfo, position, MediaType.ANY);
+            } else if (SIMPLIFIED_DOWNLOAD_MENU) {
+                simplifiedDownloadDialogBox(context, mediaInfo, position);
             } else {
                 downloadDialogBox(context, mediaInfo, position);
             }

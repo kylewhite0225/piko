@@ -22,6 +22,7 @@ import app.morphe.extension.instagram.utils.Pref;
 import app.morphe.extension.instagram.settings.SettingsStatus;
 import app.morphe.extension.instagram.entity.Entity;
 import app.morphe.extension.instagram.constants.UI;
+import app.morphe.extension.instagram.patches.download.DownloadUtils;
 
 import app.morphe.extension.instagram.patches.overflowMenuButton.reels.buttons.ReelButton;
 import app.morphe.extension.instagram.patches.overflowMenuButton.reels.buttons.DownloadButton;
@@ -56,10 +57,7 @@ public class AddReelButton {
     private static void addDownloadButton(Context context, Object helperObject, Object mediaObject, int currentMediaIndex){
         String icon = UI.DRAWABLE_DOWNLOAD_ICON;
         ReelButton reelButton = new DownloadButton(context, mediaObject, currentMediaIndex);
-        String DOWNLOAD_BUTTON_TEXT = str("piko_download_options");
-        if(Pref.enableDirectDownload()){
-            DOWNLOAD_BUTTON_TEXT = str("piko_category_download_media");
-        }
+        String DOWNLOAD_BUTTON_TEXT = DownloadUtils.downloadButtonText();
 
         ReelOverflowButton reelOverflowButton = new ReelOverflowButton(icon,reelButton,DOWNLOAD_BUTTON_TEXT);
 

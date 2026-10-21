@@ -780,6 +780,14 @@ public class ScreenBuilder {
 
         addPreference(
                 helper.switchPreference(
+                        str("piko_simplified_download_menu"),
+                        str("piko_simplified_download_menu_desc"),
+                        Settings.SIMPLIFIED_DOWNLOAD_MENU
+                )
+        );
+
+        addPreference(
+                helper.switchPreference(
                         str("piko_download_username_folder"),
                         str("piko_download_username_folder_desc"),
                         Settings.DOWNLOAD_USERNAME_FOLDER

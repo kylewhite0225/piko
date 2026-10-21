@@ -51,6 +51,12 @@ public class HookFlags {
 //        BOOL_FLAGS.put("80654", false); //ig_meta_ai_cdd_reels_viewer
     }
 
+    private static void metaAiFlags() {
+        BOOL_FLAGS.put("109730", false); //ig_android_ai_discovery_menu
+        BOOL_FLAGS.put("80654", false); //ig_meta_ai_cdd_reels_viewer
+        BOOL_FLAGS.put("111509::3", false); //ig_search_ta_nullstate_suggestions::is_android_enabled
+    }
+
     private static void profileActionBarFlags() {
         Set<String> pref = Pref.userProfileActionBarButtons();
         if (!pref.equals(Set.of(Constants.AB_CREATE))) {

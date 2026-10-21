@@ -194,6 +194,9 @@
     <string name="piko_save_media_comment_desc">Adds a button to save media comments on posts and reels</string>
     <string name="piko_enable_direct_download">Enable direct download</string>
     <string name="piko_enable_direct_download_desc">Downloads the current viewing media without asking for options</string>
+    <string name="piko_simplified_download_menu">Simplified download menu</string>
+    <string name="piko_simplified_download_menu_desc">Downloads single photos and videos directly, and only asks to download the current media or all media for carousels</string>
+    <string name="piko_download">Download</string>
     <string name="piko_download_username_folder">Split media by username</string>
     <string name="piko_download_username_folder_desc">Creates subfolders based on username</string>
     <string name="piko_embed_download_metadata">Embed video metadata</string>

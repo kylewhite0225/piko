@@ -120,11 +120,7 @@ public class FeedButton {
 
 
     private static void addDownloadButton(Object buttonAdderObject, ArrayList buttonlist) throws Exception {
-        String DOWNLOAD_BUTTON_TEXT = str("piko_download_options");
-        if(Pref.enableDirectDownload()){
-            DOWNLOAD_BUTTON_TEXT = str("piko_category_download_media");
-        }
-        addButton(MediaOption$Option.PIKO_DOWNLOAD, DOWNLOAD_BUTTON_TEXT, buttonAdderObject, buttonlist);
+        addButton(MediaOption$Option.PIKO_DOWNLOAD, DownloadUtils.downloadButtonText(), buttonAdderObject, buttonlist);
     }
 
     public static void addFeedOverflowButton(Object buttonAdderObject, ArrayList buttonlist){
