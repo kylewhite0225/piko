@@ -40,7 +40,7 @@ public class MoreOptionsOnPostPatch {
             options.add(str("piko_copy_post_description"));
             options.add(str("piko_copy_post_owner_username"));
             options.add(str("piko_copy_post_owner_fullname"));
-            options.add(str("piko_download_options"));
+            options.add(DownloadUtils.downloadButtonText());
             CharSequence[] items = options.toArray(new CharSequence[0]);
 
             dialog.addDialogMenuItems(items, new DialogInterface.OnClickListener() {
@@ -62,7 +62,7 @@ public class MoreOptionsOnPostPatch {
                             UserData userData = mediaData.getUserData();
                             stringToCopy = userData.getFullName();
 
-                        } else if (selectedOption.equals(str("piko_download_options"))) {
+                        } else if (DownloadUtils.isDownloadButtonText(selectedOption)) {
                             DownloadUtils.downloadPost(context, userSession, mediaObject, currentMediaIndex);
 
                         }

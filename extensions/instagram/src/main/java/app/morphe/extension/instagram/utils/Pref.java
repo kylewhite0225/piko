@@ -326,6 +326,10 @@ public class Pref {
         return SharedPref.getBooleanPref(Settings.ENABLE_DIRECT_DOWNLOAD);
     }
 
+    public static boolean simplifiedDownloadMenu() {
+        return SharedPref.getBooleanPref(Settings.SIMPLIFIED_DOWNLOAD_MENU);
+    }
+
     public static boolean downloadUsernameFolder() {
         return SharedPref.getBooleanPref(Settings.DOWNLOAD_USERNAME_FOLDER);
     }

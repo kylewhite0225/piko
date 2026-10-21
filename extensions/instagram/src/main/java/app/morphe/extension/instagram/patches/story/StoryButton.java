@@ -26,13 +26,11 @@ import com.instagram.common.session.UserSession;
 public class StoryButton {
     private static boolean VIEW_STORY_MENTIONS;
     private static boolean ENABLE_DOWNLOAD;
-    private static boolean ENABLE_DIRECT_DOWNLOAD;
     private static boolean DEBUG;
 
     static{
         VIEW_STORY_MENTIONS = Pref.viewStoryMentions() && SettingsStatus.viewStoryMentions;
         ENABLE_DOWNLOAD = Pref.enableDownload() && SettingsStatus.downloadMedia;
-        ENABLE_DIRECT_DOWNLOAD = Pref.enableDirectDownload() && SettingsStatus.downloadMedia;
         DEBUG = Pref.pikoDebug();
     }
 
@@ -44,11 +42,7 @@ public class StoryButton {
             buttonList.add(str("piko_view_story_mentions"));
         }
         if(ENABLE_DOWNLOAD){
-            if(ENABLE_DIRECT_DOWNLOAD){
-                buttonList.add(str("piko_category_download_media"));
-            }else{
-                buttonList.add(str("piko_download_options"));
-            }
+            buttonList.add(DownloadUtils.downloadButtonText());
         }
         if(Pref.downloadWithExternalDownloader()){
             buttonList.add(str("piko_download_with_external_downloader"));
@@ -62,7 +56,7 @@ public class StoryButton {
             if (buttonText.equals(str("piko_view_story_mentions"))) {
                 ViewStoryMentionsPatch.viewMentions(ctx, mediaObject);
                 return true;
-            } else if (buttonText.equals(str("piko_download_options")) || buttonText.equals(str("piko_category_download_media"))) {
+            } else if (DownloadUtils.isDownloadButtonText(buttonText)) {
                 DownloadUtils.downloadPost(ctx,null,mediaObject,0);
                 return true;
             } else if (buttonText.equals(str("piko_debug"))) {
